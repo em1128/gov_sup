@@ -21,12 +21,13 @@ public class java3 {
 		Scanner sc1 = new Scanner(System.in);
 
 		DrinkMachine dMachine = new DrinkMachine();
-		do {
+		Label: do {
 			dMachine.menu_print();
 			sel = sc1.nextInt();
 			switch (sel) {
+			
 			case 9:
-				break;
+				break Label;
 			case 0:
 				// 입금
 
@@ -46,10 +47,12 @@ public class java3 {
 
 		} while (sel != 9);
 		// 거스름돈 반환
+		sc1.close();
+		
 		dMachine.return_money(money);
 		System.out.println();
 		dMachine.result_print();
-		sc1.close();
+
 
 	}
 
@@ -90,28 +93,28 @@ public class java3 {
 		private int sell_drink(int sel, int money) {
 			// 음료수 판매 start
 			if (sel == 1) {
-				if (money < price_1) { // 음료수1 판매
+				if (money < this.price_1) { // 음료수1 판매
 					System.out.println("Error : 금액이 부족합니다!!!");
 				} else {
-					money -= price_1;
+					money -= this.price_1;
 					System.out.println("음료수1 구매완료!");
 					this.drink_1++;
 				}
 
 			} else if (sel == 2) { // 음료수2 판매
-				if (money < price_2) {
+				if (money < this.price_2) {
 					System.out.println("Error : 금액이 부족합니다!!!");
 				} else {
-					money -= price_2;
+					money -= this.price_2;
 					System.out.println("음료수2 구매완료!");
 					this.drink_2++;
 				}
 
 			} else if (sel == 3) { // 음료수3 판매
-				if (money < price_3) {
+				if (money < this.price_3) {
 					System.out.println("Error : 금액이 부족합니다!!!");
 				} else {
-					money -= price_3;
+					money -= this.price_3;
 					System.out.println("음료수3 구매완료!");
 					this.drink_3++;
 				}
