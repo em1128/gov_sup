@@ -46,7 +46,7 @@ import java.io.IOException;
 
 import java.util.Scanner;
 
-public class java4 {
+public class MyCalendar {
 	public static void main(String[] args) throws IOException {
 		int year = 2021, month = 4;
 
