@@ -21,13 +21,13 @@ public class java3 {
 		Scanner sc1 = new Scanner(System.in);
 
 		DrinkMachine dMachine = new DrinkMachine();
-		Label: do {
+		Outer: do {
 			dMachine.menu_print();
 			sel = sc1.nextInt();
 			switch (sel) {
 			
-			case 9:
-				break Label;
+			case 9: 
+				break Outer;// 반복 종료
 			case 0:
 				// 입금
 

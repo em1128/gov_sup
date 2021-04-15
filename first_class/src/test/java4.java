@@ -51,10 +51,10 @@ public class java4 {
 		int year = 2021, month = 4;
 
 		Scanner sc1 = new Scanner(System.in);
-//		System.out.println("년>");
-//		year = sc1.nextInt();
-//		System.out.println("월>");
-//		month = sc1.nextInt();
+		System.out.println("년>");
+		year = sc1.nextInt();
+		System.out.println("월>");
+		month = sc1.nextInt();
 
 		print_month_first(month - 1, year);
 		print_month_first(month, year);
@@ -63,14 +63,14 @@ public class java4 {
 		sc1.close();
 	}
 
-	private static boolean isYoon(int year) {
+	private static boolean isYoon(int year) { // 윤년 확인
 		if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))
 			return true;
 		else
 			return false;
 	}
 
-	private static int calculate_first(int month, int year) {
+	private static int calculate_first(int month, int year) { // 시작요일 계산(숫자로 반환)
 		int m_first = 1;
 		if (month == 0) {
 			month = 12;
@@ -113,8 +113,8 @@ public class java4 {
 				m_first += 31;
 			if (sub_m >= 11)
 				m_first += 30;
-			
-			m_first%=7;
+
+			m_first %= 7;
 		} else { // year<1900
 			for (int i = 1900; i > year; i--) {
 				m_first--;
@@ -157,13 +157,13 @@ public class java4 {
 	}
 
 	private static void print_month_first(int month, int year) {
-		int m_first;
+		char m_first; // ?월1일의 요일
 		char dow[] = { '일', '월', '화', '수', '목', '금', '토' };
 
 		System.out.printf("%d년 %d월\n", year, month);
-		for (char c : dow) {
-			System.out.print(c + "\t");
-		}
+		for (char c : dow)
+			System.out.print(c + "\t"); // 한글요일 전체 출력
+
 		System.out.println();
 		m_first = dow[calculate_first(month, year)];
 
@@ -174,7 +174,7 @@ public class java4 {
 				if (i % 7 == 0)
 					System.out.println();
 			}
-			print_after_28('일', month, year);
+			print_after_28(month, year);// 29, 30, 31일 출력
 
 			break;
 
@@ -185,7 +185,7 @@ public class java4 {
 				if (i % 7 == 6)
 					System.out.println();
 			}
-			print_after_28(month, year);
+			print_after_28(month, year); // 29, 30, 31일 출력
 
 			break;
 
@@ -197,7 +197,7 @@ public class java4 {
 				if (i % 7 == 5)
 					System.out.println();
 			}
-			print_after_28(month, year);
+			print_after_28(month, year);// 29, 30, 31일 출력
 
 			break;
 
@@ -209,7 +209,7 @@ public class java4 {
 				if (i % 7 == 4)
 					System.out.println();
 			}
-			print_after_28(month, year);
+			print_after_28(month, year);// 29, 30, 31일 출력
 
 			break;
 
@@ -220,7 +220,7 @@ public class java4 {
 				if (i % 7 == 3)
 					System.out.println();
 			}
-			print_after_28(month, year);
+			print_after_28(month, year);// 29, 30, 31일 출력
 			break;
 
 		case '금':
@@ -230,7 +230,7 @@ public class java4 {
 				if (i % 7 == 2)
 					System.out.println();
 			}
-			print_after_28('금', month, year);
+			print_after_28('금', month, year);// 29, 30, 31일 출력
 			break;
 
 		case '토':
@@ -240,7 +240,7 @@ public class java4 {
 				if (i % 7 == 1)
 					System.out.println();
 			}
-			print_after_28('토', month, year);
+			print_after_28('토', month, year);// 29, 30, 31일 출력
 			break;
 		default:
 			System.out.println("Error : 시작일이 잘못됨!!!");
@@ -250,31 +250,31 @@ public class java4 {
 	}
 
 	private static void print_after_28(int month, int year) {
-		// TODO Auto-generated method stub
+		// 29,30,31일 출력
 		if (month == 4 || month == 6 || month == 9 || month == 11)
 			System.out.println("29\t30");
-		if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+		else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
 			System.out.println("29\t30\t31");
-		if (isYoon(year)) // month == 2
+		else if (isYoon(year)) // month==2, 윤년
 			System.out.println("29");
 	}
 
 	private static void print_after_28(char dow, int month, int year) {
-		// TODO Auto-generated method stub
+		// 29,30,31일 출력
 		if (dow == '금') {
 			if (month == 4 || month == 6 || month == 9 || month == 11)
 				System.out.println("29\t30");
-			if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+			else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
 				System.out.println("29\t30\n31");
-			if (isYoon(year)) // month==2
+			else if (isYoon(year)) // month==2, 윤년
 				System.out.println("29");
 		}
 		if (dow == '토') {
 			if (month == 4 || month == 6 || month == 9 || month == 11)
 				System.out.println("29\n30");
-			if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+			else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
 				System.out.println("29\n30\t31");
-			if (isYoon(year)) // month==2
+			else if (isYoon(year)) // month==2, 윤년
 				System.out.println("29");
 		}
 	}

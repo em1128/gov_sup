@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class java2 {
 	public static void main(String[] args) throws IOException {
-		System.out.println("");
+		System.out.println();
 		Scanner sc1 = new Scanner(System.in);
 	
 		int n1 = 1024;
