@@ -72,14 +72,7 @@ public class java4 {
 
 	private static int calculate_first(int month, int year) { // 시작요일 계산(숫자로 반환)
 		int m_first = 1;
-		if (month == 0) {
-			month = 12;
-			year--;
-		}
-		if (month == 13) {
-			month = 1;
-			year++;
-		}
+
 		if (year >= 1900) {
 			for (int i = 1900; i < year; i++) {
 				m_first++;
@@ -116,41 +109,50 @@ public class java4 {
 
 			m_first %= 7;
 		} else { // year<1900
-			for (int i = 1900; i > year; i--) {
+
+			for (int i = 1899; i > year; i--) {
+
 				m_first--;
 				if (isYoon(i))
 					m_first--;
 			}
-			int sub_m = 12 - month;
-			if (sub_m >= 0)
-				m_first -= 31;
-			if (sub_m >= 1)
-				m_first -= 30;
-			if (sub_m >= 2)
-				m_first -= 31;
-			if (sub_m >= 3)
-				m_first -= 30;
-			if (sub_m >= 4)
-				m_first -= 31;
-			if (sub_m >= 5)
-				m_first -= 31;
-			if (sub_m >= 6)
-				m_first -= 30;
-			if (sub_m >= 7)
-				m_first -= 31;
-			if (sub_m >= 8)
-				m_first -= 30;
-			if (sub_m >= 9)
-				m_first -= 31;
-			if (sub_m >= 10) {
+			if (month == 1) {
+				m_first--;
 				if (isYoon(year))
-					m_first -= 29;
-				else
-					m_first -= 28;
+					m_first--;
+			} else {
+				int sub_m = 12 - month;
 
-			}
-			m_first = (m_first % 7) + 7;
+				if (sub_m >= 0)
+					m_first -= 31;
+				if (sub_m >= 1)
+					m_first -= 30;
+				if (sub_m >= 2)
+					m_first -= 31;
+				if (sub_m >= 3)
+					m_first -= 30;
+				if (sub_m >= 4)
+					m_first -= 31;
+				if (sub_m >= 5)
+					m_first -= 31;
+				if (sub_m >= 6)
+					m_first -= 30;
+				if (sub_m >= 7)
+					m_first -= 31;
+				if (sub_m >= 8)
+					m_first -= 30;
+				if (sub_m >= 9)
+					m_first -= 31;
+				if (sub_m >= 10) {
+					if (isYoon(year))
+						m_first -= 29;
+					else
+						m_first -= 28;
+				}
 
+			} // sub_m end
+
+			m_first = (m_first % 7 == 0) ? (m_first % 7) : (m_first % 7 + 7);
 		} // year<1900 end
 
 		return m_first;
@@ -160,11 +162,19 @@ public class java4 {
 		char m_first; // ?월1일의 요일
 		char dow[] = { '일', '월', '화', '수', '목', '금', '토' };
 
+		if (month == 0) {
+			month = 12;
+			year--;
+		}
+		if (month == 13) {
+			month = 1;
+			year++;
+		}
 		System.out.printf("%d년 %d월\n", year, month);
 		for (char c : dow)
 			System.out.print(c + "\t"); // 한글요일 전체 출력
-
 		System.out.println();
+
 		m_first = dow[calculate_first(month, year)];
 
 		switch (m_first) { // 달력 start
